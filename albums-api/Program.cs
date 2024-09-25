@@ -4,7 +4,7 @@ var DefaultHttpPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT") ?? "3
 var AlbumStateStore = "statestore";
 var CollectionId = Environment.GetEnvironmentVariable("COLLECTION_ID") ?? "GreatestHits";
 
-// Add services to the container.
+// Add services to the container..
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
