@@ -46,13 +46,18 @@ namespace UnsecureApp.Controllers
             {
                 SqlCommand sqlCommand = new SqlCommand()
                 {
-                    CommandText = "SELECT ProductId FROM Products WHERE ProductName = '" + productName + "'",
+                    CommandText = "SELECT ProductId FROM Products WHERE ProductName = @productName",
                     CommandType = CommandType.Text,
                 };
                 sqlCommand.Parameters.AddWithValue("@productName", productName);
 
+                connection.Open();
                 SqlDataReader reader = sqlCommand.ExecuteReader();
-                return reader.GetInt32(0); 
+                if (reader.Read())
+                {
+                    return reader.GetInt32(0);
+                }
+                return -1; // or handle the case where no product is found
             }
         }
 
