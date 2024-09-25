@@ -40,6 +40,27 @@ namespace UnsecureApp.Controllers
             }
         }
 
+        public int GetProductt(string productName)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand sqlCommand = new SqlCommand()
+                {
+                    CommandText = "SELECT ProductId FROM Products WHERE ProductName = @productName",
+                    CommandType = CommandType.Text,
+                };
+                sqlCommand.Parameters.AddWithValue("@productName", productName);
+
+                connection.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.Read())
+                {
+                    return reader.GetInt32(0);
+                }
+                return -1; // or handle the case where no product is found
+            }
+        }
+
         public void GetObject()
         {
             try
